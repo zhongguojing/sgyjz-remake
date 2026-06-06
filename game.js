@@ -188,10 +188,11 @@ class BattleScene extends Phaser.Scene {
   }
 
   getHexPoints(cx, cy, size) {
+    // 返回扁平坐标数组 [x1,y1,x2,y2,...] 供 add.polygon 使用
     const pts = [];
     for (let i=0; i<6; i++) {
       const a = (Math.PI/180)*(60*i);
-      pts.push(new Phaser.Geom.Point(cx+size*Math.cos(a), cy+size*Math.sin(a)));
+      pts.push(cx + size*Math.cos(a), cy + size*Math.sin(a));
     }
     return pts;
   }

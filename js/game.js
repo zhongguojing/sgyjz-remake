@@ -3,7 +3,7 @@
 // 使用Lua翻译的战斗数据模块
 // ============================================================
 
-import * as Phaser from 'https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js';
+// Phaser已通过全局脚本加载，直接使用 Phaser 变量
 import { BootScene } from './scenes/BootScene.js';
 import { TitleScene } from './scenes/TitleScene.js';
 import { BattleScene } from './scenes/BattleScene.js';

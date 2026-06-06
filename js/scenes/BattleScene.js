@@ -3,7 +3,7 @@
 // 集成Lua翻译模块（伤害计算/移动范围/AI/策略）
 // ============================================================
 
-import * as Phaser from 'https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js';
+// Phaser已通过全局脚本加载，直接使用 Phaser 变量
 import {
   TERRAIN_NAMES, TERRAIN_COLORS, TERRAIN_ICONS, TERRAIN_DEF_MODIFIER,
   CLASS_DATA, WAR_CONSTANTS, bzSuper,

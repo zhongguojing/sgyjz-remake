@@ -2,7 +2,7 @@
 // 三国志英杰传 重制版 - 标题场景
 // ============================================================
 
-import * as Phaser from 'https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js';
+// Phaser已通过全局脚本加载，直接使用 Phaser 变量
 import { BattleScene } from './BattleScene.js';
 
 export class TitleScene extends Phaser.Scene {

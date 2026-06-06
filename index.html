@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三国志英杰传 - 重制版 v0.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>三国志英杰传 - 重制版 v0.2</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -26,19 +26,62 @@
     #loading-bar-bg { width: 300px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
     #loading-bar { width: 0%; height: 100%; background: linear-gradient(90deg,#c9a84c,#f0d77b); transition: width 0.3s; }
     #loading-text { color: #888; margin-top: 15px; font-size: 14px; }
+    #error-screen {
+      display: none; position: fixed; top:0; left:0; right:0; bottom:0;
+      background: #0d1b2a; flex-direction: column;
+      justify-content: center; align-items: center; z-index: 10000;
+      text-align: center; padding: 20px;
+    }
+    #error-screen h2 { color: #f44336; font-size: 24px; margin-bottom: 15px; }
+    #error-screen p { color: #ccc; font-size: 14px; line-height: 1.8; max-width: 400px; }
+    #error-screen button {
+      margin-top: 20px; padding: 10px 30px; background: #c9a84c;
+      color: #000; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div id="loading-screen">
     <h1>三国志英杰传</h1>
     <div id="loading-bar-bg"><div id="loading-bar"></div></div>
-    <div id="loading-text">正在加载游戏...</div>
+    <div id="loading-text">正在加载引擎...</div>
+  </div>
+  <div id="error-screen">
+    <h2>加载失败</h2>
+    <p>游戏引擎加载失败，可能是网络问题。<br>请刷新页面重试，或检查网络连接。</p>
+    <button onclick="location.reload()">刷新重试</button>
   </div>
   <div id="game-container"></div>
 
-  <!-- Phaser 4 CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.min.js"></script>
-  <!-- 游戏主逻辑（单文件，无需构建） -->
+  <script>
+    // 加载进度提示
+    document.getElementById('loading-bar').style.width = '20%';
+    document.getElementById('loading-text').textContent = '正在加载游戏引擎...';
+  </script>
+
+  <!-- Phaser 3.60 CDN（主）+ 备用源 -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"
+    onerror="document.getElementById('loading-text').textContent='CDN1失败，尝试备用源...';this.onerror=null;this.src='https://unpkg.com/phaser@3.60.0/dist/phaser.min.js'">
+  </script>
+
+  <script>
+    document.getElementById('loading-bar').style.width = '50%';
+    document.getElementById('loading-text').textContent = '正在加载游戏数据...';
+  </script>
+
+  <!-- 游戏主逻辑 -->
   <script src="game.js"></script>
+
+  <script>
+    // 加载失败检测
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        if (typeof Phaser === 'undefined') {
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('error-screen').style.display = 'flex';
+        }
+      }, 3000);
+    });
+  </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "fengari-web": "^0.1.4",
     "phaser": "^4.1.0"
   },
   "devDependencies": {
